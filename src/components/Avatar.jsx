@@ -1,7 +1,6 @@
-import React from 'react'
 import { styled } from '@stitches/react'
 import * as AvatarPrimitive from '@radix-ui/react-avatar'
-import avatarImage from '../assets/image-avatar.png'
+import avatarImage from '../assets/images/image-avatar.png'
 
 const StyledAvatar = styled(AvatarPrimitive.Root, {
   display: 'inline-flex',

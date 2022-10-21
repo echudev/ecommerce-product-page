@@ -1,7 +1,7 @@
 import { styled, keyframes } from '../stitches.config'
 import PropTypes from 'prop-types'
 import * as HoverCardPrimitive from '@radix-ui/react-hover-card'
-import cartIcon from '../assets/icon-cart.svg'
+import cartIcon from '../assets/icons/icon-cart.svg'
 import { Separator } from './Separator'
 
 // Animaciones del hover

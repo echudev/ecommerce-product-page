@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { Box } from './Box.jsx'
 import Avatar from './Avatar'
 import Cart from './Cart'
-import logo from '../assets/logo.svg'
+import logo from '../assets/icons/logo.svg'
 
 const StyledNav = styled('nav', {
   height: '6rem',

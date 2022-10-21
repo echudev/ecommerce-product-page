@@ -1,7 +1,7 @@
 import { Navbar } from './components/Navbar.jsx'
 import { globalStyles } from './stitches.config.js'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Product } from './components/Product.jsx'
+import { Product } from './pages/Product.jsx'
 import { Separator } from './components/Separator.jsx'
 
 function App () {
