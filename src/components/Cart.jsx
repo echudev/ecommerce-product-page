@@ -1,8 +1,10 @@
 import { styled, keyframes } from '../stitches.config'
-import PropTypes from 'prop-types'
 import * as HoverCardPrimitive from '@radix-ui/react-hover-card'
 import cartIcon from '../assets/icons/icon-cart.svg'
+import trashIcon from '../assets/icons/icon-delete.svg'
 import { Separator } from './Separator'
+import { useSelector, useDispatch } from 'react-redux'
+import { removeFromCart } from '../redux/cartSlice'
 
 // Animaciones del hover
 const slideUpAndFade = keyframes({
@@ -29,7 +31,8 @@ const slideLeftAndFade = keyframes({
 const StyledContent = styled(HoverCardPrimitive.Content, {
   borderRadius: 6,
   padding: 20,
-  width: 300,
+  width: '100%',
+  minWidth: 300,
   backgroundColor: 'white',
   boxShadow: 'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
   '@media (prefers-reduced-motion: no-preference)': {
@@ -48,13 +51,8 @@ const StyledContent = styled(HoverCardPrimitive.Content, {
 // const StyledArrow = styled(HoverCardPrimitive.Arrow, {
 //   fill: 'white'
 // })
-
-// declaro propTypes para que no muestre error eslint
-Content.propTypes = {
-  children: PropTypes.node.isRequired
-}
 // contenido de la card
-function Content ({ children, ...props }) {
+const Content = ({ children, ...props }) => {
   return (
     <HoverCardPrimitive.Portal>
       <StyledContent {...props}>
@@ -98,6 +96,7 @@ const Img = styled('img', {
 
 const Text = styled('div', {
   margin: 0,
+  display: 'inline',
   color: '$Black',
   fontSize: 15,
   lineHeight: 1.5,
@@ -107,6 +106,9 @@ const Text = styled('div', {
     },
     bold: {
       true: { fontWeight: 700 }
+    },
+    center: {
+      true: { textAlign: 'center' }
     }
   }
 })
@@ -127,29 +129,61 @@ const Badge = styled('span', {
   fontSize: '$2'
 })
 
-const Cart = () => (
-  <HoverCard openDelay={300} closeDelay={150}>
-    {/* icon */}
-    <HoverCardTrigger asChild>
-      <ImageTrigger href="https://twitter.com/radix_ui" target="_blank" rel="noreferrer noopener">
-        <Flex css={{ position: 'relative' }}>
-          <Img src={cartIcon} />
-          <Badge>5</Badge>
+const Item = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  marginBottom: 10
+})
+
+const Cart = () => {
+  const dispatch = useDispatch()
+  const cart = useSelector((store) => store.cart)
+  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0)
+
+  const handleRemoveItem = (id) => {
+    dispatch(removeFromCart(id))
+  }
+
+  return (
+    <HoverCard openDelay={300} closeDelay={150}>
+      {/* icon */}
+      <HoverCardTrigger asChild>
+        <ImageTrigger>
+          <Flex css={{ position: 'relative' }}>
+            <Img src={cartIcon} />
+            {cart.length < 1 ? null : <Badge>{totalItems}</Badge>}
+          </Flex>
+        </ImageTrigger>
+      </HoverCardTrigger>
+      {/* card  */}
+      <HoverCardContent sideOffset={5}>
+        <Flex css={{ flexDirection: 'column', gap: 7 }}>
+          <Text bold>Cart</Text>
+          <Separator />
+          {cart.length < 1
+            ? <Text faded center>Your cart is empty.</Text>
+            : <>
+              {cart.map((item, i) => (
+                <Item key={i} item={item}>
+                  <Img src={item.thumbnails[0]} alt='tmb' size='large' css={{ borderRadius: '10px' }} />
+                  <Flex css={{ flexDirection: 'column' }}>
+                    <Text as='p'>{item.name}</Text>
+                    <Text as='p'>${item.price.toFixed(2)} x {item.quantity} <b>${(item.price * item.quantity).toFixed(2)}</b></Text>
+                  </Flex>
+                  <Img
+                    onClick={() => handleRemoveItem(item.id)}
+                    src={trashIcon}
+                    css={{ width: '29px', height: '30px', marginLeft: '5px', cursor: 'pointer' }}
+                  />
+                </Item>
+              ))}
+            </>
+          }
         </Flex>
-      </ImageTrigger>
-    </HoverCardTrigger>
-    {/* card  */}
-    <HoverCardContent sideOffset={5}>
-      <Flex css={{ flexDirection: 'column', gap: 7 }}>
-        <Text bold>Cart</Text>
-        <Separator />
-        <Text faded>
-          Components, icons, colors, and templates for building high-quality, accessible UI. Free
-          and open-source.
-        </Text>
-      </Flex>
-    </HoverCardContent>
-  </HoverCard>
-)
+      </HoverCardContent>
+    </HoverCard>
+  )
+}
 
 export default Cart

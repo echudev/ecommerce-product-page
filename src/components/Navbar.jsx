@@ -1,13 +1,12 @@
 import { styled, css } from '../stitches.config'
 import { NavLink } from 'react-router-dom'
-import { Box } from './Box.jsx'
+import { Flex } from './Flex.jsx'
 import Avatar from './Avatar'
 import Cart from './Cart'
 import logo from '../assets/icons/logo.svg'
 
 const StyledNav = styled('nav', {
-  height: '6rem',
-  padding: '0 3rem',
+  padding: '0 8vw',
   display: 'flex',
   alignItems: 'center'
 })
@@ -15,7 +14,7 @@ const linksContainer = css({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: '3vw',
+  gap: '2vw',
   marginLeft: '2rem',
   height: '100%'
 })
@@ -67,9 +66,9 @@ const activeLinkClass = css({
 
 export const Navbar = () => {
   return (
-    <StyledNav>
+    <StyledNav css={ { height: '6rem' } }>
       <img src={logo} alt="logo" />
-      <Box className={linksContainer}>
+      <Flex className={linksContainer}>
         <NavLink to='/collections'
           className={({ isActive }) => isActive ? `${activeLinkClass}` : `${linkClass}`}>
           Collections
@@ -89,11 +88,11 @@ export const Navbar = () => {
           className={({ isActive }) => isActive ? `${activeLinkClass}` : `${linkClass}`}>
           Contact
         </NavLink>
-      </Box>
-      <Box css={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '3vw' }}>
+      </Flex>
+      <Flex css={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '3vw' }}>
         <Cart />
         <Avatar />
-      </Box>
+      </Flex>
     </StyledNav >
   )
 }

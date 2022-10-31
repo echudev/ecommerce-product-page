@@ -10,7 +10,7 @@ function App () {
   return (
     <div>
       <BrowserRouter>
-        <Navbar />
+        <Navbar/>
         <Separator light />
         <Routes>
           <Route path='/' element={<Product />} />
