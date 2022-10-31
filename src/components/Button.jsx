@@ -1,17 +1,16 @@
 import { styled } from '../stitches.config'
 
-const Button = styled('button', {
-  all: 'unset',
-  display: 'inline-flex',
+const Button = styled('div', {
+  display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: 4,
-  padding: '0 15px',
-  margin: 5,
+  height: '40px',
+  padding: '1.5rem',
+  margin: '1rem',
   fontSize: 15,
   lineHeight: 1,
   fontWeight: 500,
-  height: 35,
   cursor: 'pointer',
   transition: '.1s',
   '&:active': { transform: 'translateY(1px)' },
@@ -31,6 +30,9 @@ const Button = styled('button', {
         '&:hover': { backgroundColor: 'black' },
         '&:focus': { boxShadow: '0 0 0 2px violet' }
       }
+    },
+    fullWidth: {
+      true: { width: '100%' }
     }
   },
   defaultVariants: {

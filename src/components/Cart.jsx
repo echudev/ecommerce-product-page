@@ -5,6 +5,7 @@ import trashIcon from '../assets/icons/icon-delete.svg'
 import { Separator } from './Separator'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeFromCart } from '../redux/cartSlice'
+import Button from './Button'
 
 // Animaciones del hover
 const slideUpAndFade = keyframes({
@@ -33,6 +34,7 @@ const StyledContent = styled(HoverCardPrimitive.Content, {
   padding: 20,
   width: '100%',
   minWidth: 300,
+  zIndex: 1000,
   backgroundColor: 'white',
   boxShadow: 'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
   '@media (prefers-reduced-motion: no-preference)': {
@@ -45,21 +47,19 @@ const StyledContent = styled(HoverCardPrimitive.Content, {
       '&[data-side="bottom"]': { animationName: slideUpAndFade },
       '&[data-side="left"]': { animationName: slideRightAndFade }
     }
+  },
+  '@bp2': {
+    width: '95vw',
+    marginRight: '1vw',
+    marginTop: '2rem'
   }
 })
 
-// const StyledArrow = styled(HoverCardPrimitive.Arrow, {
-//   fill: 'white'
-// })
-// contenido de la card
 const Content = ({ children, ...props }) => {
   return (
-    <HoverCardPrimitive.Portal>
       <StyledContent {...props}>
         {children}
-        {/* <StyledArrow /> */}
       </StyledContent>
-    </HoverCardPrimitive.Portal>
   )
 }
 
@@ -178,6 +178,7 @@ const Cart = () => {
                   />
                 </Item>
               ))}
+              <Button>Checkout</Button>
             </>
           }
         </Flex>

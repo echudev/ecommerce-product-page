@@ -6,7 +6,7 @@ const IconButton = styled('button', {
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
-  zIndex: '999',
+  zIndex: '9',
   height: '50px',
   width: '50px',
   '&:hover': { cursor: 'pointer' },

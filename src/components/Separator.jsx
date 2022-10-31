@@ -11,6 +11,9 @@ const StyledSeparator = styled(SeparatorPrimitive.Root, {
     },
     bold: {
       true: { fontWeight: 700 }
+    },
+    display: {
+      hidden: { display: 'none' }
     }
   }
 })

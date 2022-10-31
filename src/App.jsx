@@ -11,7 +11,7 @@ function App () {
     <div>
       <BrowserRouter>
         <Navbar/>
-        <Separator light />
+        <Separator light display={{ '@bp2': 'hidden' }} />
         <Routes>
           <Route path='/' element={<Product />} />
           <Route path='/collections' element={<Product />} />

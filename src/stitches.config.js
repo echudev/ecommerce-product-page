@@ -31,7 +31,8 @@ export const {
     }
   },
   media: {
-    bp1: '(min-width: 375px)'
+    bp1: '(min-width: 375px)',
+    bp2: '(max-width: 740px)'
   }
 })
 
