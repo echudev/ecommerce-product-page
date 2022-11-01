@@ -8,6 +8,7 @@ import IconButton from '../components/IconButton'
 import Button from '../components/Button'
 import { useDispatch } from 'react-redux'
 import { addItemToCart } from '../redux/cartSlice'
+import RadixToast from './RadixToast'
 
 const Wrapper = styled('div', {
   display: 'flex',
@@ -67,11 +68,13 @@ const Counter = styled('div', {
 
 const Specs = ({ product }) => {
   const dispatch = useDispatch()
+  const [open, setOpen] = useState(false)
   const [counter, setCounter] = useState(1)
   const hanldeAddProduct = () => {
     setCounter(0)
     if (counter > 0) {
       dispatch(addItemToCart({ ...product, quantity: counter }))
+      setOpen(true)
     }
   }
 
@@ -117,6 +120,7 @@ const Specs = ({ product }) => {
               Add to cart
             </Text>
           </Button>
+          <RadixToast open={open} setOpen={setOpen}/>
         </Controls>
       </Flex>
     </Wrapper>
