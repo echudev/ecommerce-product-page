@@ -36,10 +36,9 @@ const StyledViewport = styled(ToastPrimitive.Viewport, {
 })
 
 const StyledToast = styled(ToastPrimitive.Root, {
-  backgroundColor: '$PaleOrange',
+  backgroundColor: '$White',
   borderRadius: 6,
-  border: 'solid $colors$PaleOrange 2px',
-  boxShadow: 'hsl(26 100% 55% / 30%) 0px 10px 38px -10px, hsl(26 100% 55% / 20%) 0px 10px 20px -15px',
+  boxShadow: 'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
   padding: 10,
   display: 'grid',
   gridTemplateAreas: '"title action" "description action"',
@@ -70,15 +69,14 @@ const StyledToast = styled(ToastPrimitive.Root, {
 const StyledTitle = styled(ToastPrimitive.Title, {
   gridArea: 'title',
   marginBottom: 5,
-  fontWeight: 500,
-  color: 'red',
-  fontSize: 15
+  fontSize: 15,
+  color: '$Black',
+  fontWeight: '$bold'
 })
-
 const StyledDescription = styled(ToastPrimitive.Description, {
   gridArea: 'description',
   margin: 0,
-  color: 'black',
+  color: '$DarkGrayishBlue',
   fontSize: 13,
   lineHeight: 1.3
 })
@@ -100,9 +98,12 @@ const RadixToast = ({ open, setOpen }) => {
   return (
     <ToastProvider swipeDirection="right">
       <Toast open={open} onOpenChange={setOpen} duration={1500}>
-        <ToastTitle css={{ color: '$DarkGrayishBlue', fontWeight: '$bold', textAlign: 'center' }}>
-          Product added to cart
+        <ToastTitle>
+          Done!
         </ToastTitle>
+        <ToastDescription asChild>
+          <p>Product added to cart</p>
+        </ToastDescription>
         <ToastAction asChild altText="close">
           <IconButton css={{ fontWeight: '$bold', color: '$Orange' }}>X</IconButton>
         </ToastAction>
