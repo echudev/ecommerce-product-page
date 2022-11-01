@@ -1,6 +1,6 @@
 import { styled, css } from '../stitches.config'
 import { useState } from 'react'
-import ImageDialog from '../components/ImageDialog'
+import ImgModal from './ImgModal'
 
 const Wraper = styled('div', {
   position: 'relative',
@@ -72,7 +72,7 @@ const Galery = ({ product }) => {
           style={{ display: index.toString() === selectedImg ? 'flex' : 'none' }}
         />
       ))}
-      <ImageDialog open={open} setOpen={setOpen} />
+      <ImgModal open={open} setOpen={setOpen} images={product.images} thumbnails={product.thumbnails}/>
       <ThumbnailContainer>
         {product.thumbnails.map((thumbnail, index) => (
           <Thumbnail

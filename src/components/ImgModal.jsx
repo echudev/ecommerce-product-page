@@ -4,14 +4,6 @@ import 'animate.css'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import IconButton from './IconButton.jsx'
 import { Flex } from './Flex.jsx'
-import img1 from '../assets/images/image-product-1.jpg'
-import img2 from '../assets/images/image-product-2.jpg'
-import img3 from '../assets/images/image-product-3.jpg'
-import img4 from '../assets/images/image-product-4.jpg'
-import tmb1 from '../assets/images/image-product-1-thumbnail.jpg'
-import tmb2 from '../assets/images/image-product-2-thumbnail.jpg'
-import tmb3 from '../assets/images/image-product-3-thumbnail.jpg'
-import tmb4 from '../assets/images/image-product-4-thumbnail.jpg'
 
 const overlayShow = keyframes({
   '0%': { opacity: 0 },
@@ -63,7 +55,7 @@ const Img = styled('img', {
 const Tmb = styled('img', {
   display: 'flex',
   margin: 7,
-  maxWidth: '120px',
+  maxWidth: '80px',
   minWidth: '10px',
   height: 'auto',
   borderRadius: '15%',
@@ -89,7 +81,7 @@ export const DialogTrigger = DialogPrimitive.Trigger
 export const DialogContent = Content
 export const DialogClose = DialogPrimitive.Close
 
-const ImageDialog = ({ open, setOpen }) => {
+const ImgModal = ({ open, setOpen, images, thumbnails }) => {
   const [iconColor, setIconColor] = useState({
     close: '#ffffff',
     left: '#1D2026',
@@ -101,24 +93,7 @@ const ImageDialog = ({ open, setOpen }) => {
   const handlerCloseColorLeave = (btn) => {
     setIconColor({ ...iconColor, [btn]: btn === 'close' ? '#ffffff' : '#1D2026' })
   }
-  const [state, setState] = useState({
-    img: img1,
-    index: '0'
-  })
-
-  const thumbnails = [tmb1, tmb2, tmb3, tmb4]
-
-  const handleClick = (e) => {
-    if (e.target.name === '0') {
-      setState({ img: img1, index: '0' })
-    } else if (e.target.name === '1') {
-      setState({ img: img2, index: '1' })
-    } else if (e.target.name === '2') {
-      setState({ img: img3, index: '2' })
-    } else if (e.target.name === '3') {
-      setState({ img: img4, index: '3' })
-    }
-  }
+  const [selectedImg, setSelectedImg] = useState(0)
 
   const selected = css({
     boxShadow: '0 0 0 3px $colors$Orange',
@@ -131,7 +106,7 @@ const ImageDialog = ({ open, setOpen }) => {
         <Flex column center css={{ height: '95vh', position: 'relative' }}>
           {/* Botón que cierra el dialog */}
           <DialogClose asChild>
-            <IconButton close name='close'
+            <IconButton close name='close' css={{ zIndex: '1' }}
               onPointerEnter={(e) => handlerCloseColorEnter(e.target.name)}
               onPointerLeave={(e) => handlerCloseColorLeave(e.target.name)}>
               <svg width="15" height="15" xmlns="http://www.w3.org/2000/svg">
@@ -140,25 +115,33 @@ const ImageDialog = ({ open, setOpen }) => {
               </svg>
             </IconButton>
           </DialogClose>
-          {/* galería de imágenes */}
-          <IconButton right name='right'
+          <IconButton right name='right' css={{ zIndex: '1' }}
+            onClick={() => setSelectedImg(selectedImg < 3 ? selectedImg + 1 : 0)}
             onPointerEnter={(e) => handlerCloseColorEnter(e.target.name)}
             onPointerLeave={(e) => handlerCloseColorLeave(e.target.name)}>
             <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg"><path d="m2 1 8 8-8 8" stroke={iconColor.right} strokeWidth="3" fill="none" fillRule="evenodd" /></svg>
           </IconButton>
-          <Img src={state.img} alt="" />
-          <IconButton left name='left'
+          {/* galería de imágenes */}
+          {images.map((image, index) => (
+            <Img src={image} alt=""
+              id={index}
+              key={index}
+              style={{ display: index === selectedImg ? 'flex' : 'none' }}
+            />
+          ))}
+          <IconButton left name='left' css={{ zIndex: '1' }}
+            onClick={() => setSelectedImg(selectedImg > 0 ? selectedImg - 1 : 3)}
             onPointerEnter={(e) => handlerCloseColorEnter(e.target.name)}
             onPointerLeave={(e) => handlerCloseColorLeave(e.target.name)}>
             <svg width="17" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M11 1 3 9l8 8" stroke={iconColor.left} strokeWidth="3" fill="none" fillRule="evenodd" /></svg>          </IconButton>
           <Flex row>
             {thumbnails.map((thumbnail, index) => (
               <Tmb
-                onClick={handleClick}
-                name={index}
+                onClick={(e) => setSelectedImg(Number(e.target.id))}
+                id={index}
                 key={index}
                 src={thumbnail}
-                className={state.index === index.toString() ? selected : null}
+                className={selectedImg === index ? selected : null}
               />
             ))}
           </Flex>
@@ -168,4 +151,4 @@ const ImageDialog = ({ open, setOpen }) => {
   )
 }
 
-export default ImageDialog
+export default ImgModal
