@@ -2,6 +2,7 @@ import { styled } from '../stitches.config'
 import { useSelector } from 'react-redux'
 import Galery from '../components/Galery'
 import Specs from '../components/Specs'
+import EmblaCarousel from '../components/EmblaCarousel/EmblaCarousel'
 
 const Wrapper = styled('div', {
   display: 'flex',
@@ -22,6 +23,7 @@ export const Product = ({ id = 1 }) => {
 
   return (
     <Wrapper>
+      <EmblaCarousel images={product.images} />
       <Galery product={product} />
       <Specs product={product} />
     </Wrapper>

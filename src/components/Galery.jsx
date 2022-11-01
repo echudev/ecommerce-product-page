@@ -12,8 +12,7 @@ const Wraper = styled('div', {
   maxHeight: '610px',
   margin: '0 4vw',
   '@bp2': {
-    width: '100%',
-    maxWidth: '100%'
+    display: 'none'
   }
 })
 const Img = styled('img', {
@@ -63,28 +62,28 @@ const Galery = ({ product }) => {
 
   return (
     <Wraper>
-        {product.images.map((image, index) => (
-          <Img
-            onClick={() => setOpen(true)}
+      {product.images.map((image, index) => (
+        <Img
+          onClick={() => setOpen(true)}
+          name={index}
+          key={index}
+          src={image}
+          className={'animate__animated animate__fadeIn'}
+          style={{ display: index.toString() === selectedImg ? 'flex' : 'none' }}
+        />
+      ))}
+      <ImageDialog open={open} setOpen={setOpen} />
+      <ThumbnailContainer>
+        {product.thumbnails.map((thumbnail, index) => (
+          <Thumbnail
+            onClick={(e) => setSelectedImg(e.target.name)}
             name={index}
             key={index}
-            src={image}
-            className={'animate__animated animate__fadeIn'}
-            style={{ display: index.toString() === selectedImg ? 'flex' : 'none' }}
+            src={thumbnail}
+            className={selectedImg === index.toString() ? selected : null}
           />
         ))}
-        <ImageDialog open={open} setOpen={setOpen} />
-        <ThumbnailContainer>
-          {product.thumbnails.map((thumbnail, index) => (
-            <Thumbnail
-              onClick={(e) => setSelectedImg(e.target.name)}
-              name={index}
-              key={index}
-              src={thumbnail}
-              className={selectedImg === index.toString() ? selected : null}
-            />
-          ))}
-        </ThumbnailContainer>
+      </ThumbnailContainer>
     </Wraper>
   )
 }
