@@ -33,6 +33,9 @@ const Button = styled('div', {
     },
     fullWidth: {
       true: { width: '100%' }
+    },
+    unset: {
+      true: { margin: 0, padding: 0 }
     }
   },
   defaultVariants: {

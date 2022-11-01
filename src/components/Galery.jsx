@@ -17,7 +17,7 @@ const Wraper = styled('div', {
   }
 })
 const Img = styled('img', {
-  display: 'none',
+  display: 'flex',
   width: '100%',
   minWidth: '200px',
   maxHeight: '350px',
@@ -57,10 +57,6 @@ const selected = css({
   boxShadow: '0 0 0 3px $colors$Orange'
 })
 
-const toShow = css({
-  display: 'flex'
-})
-
 const Galery = ({ product }) => {
   const [selectedImg, setSelectedImg] = useState('0')
   const [open, setOpen] = useState(false)
@@ -69,13 +65,12 @@ const Galery = ({ product }) => {
     <Wraper>
         {product.images.map((image, index) => (
           <Img
+            onClick={() => setOpen(true)}
             name={index}
             key={index}
             src={image}
-            className={selectedImg === index.toString()
-              ? `animate__animated animate__fadeIn ${toShow} `
-              : 'animate__animated animate__fadeIn'}
-            onClick={() => setOpen(true)}
+            className={'animate__animated animate__fadeIn'}
+            style={{ display: index.toString() === selectedImg ? 'flex' : 'none' }}
           />
         ))}
         <ImageDialog open={open} setOpen={setOpen} />
