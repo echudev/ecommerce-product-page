@@ -45,6 +45,8 @@ export const globalStyles = globalCss({
     boxSizing: 'border-box',
     fontFamily: 'kumbh sans, sans-serif',
     userSelect: 'none',
-    outline: 'none'
+    WebkitTapHighlightColor: 'transparent',
+    WebkitFontSmoothing: 'antialiased',
+    MozOsxFontSmoothing: 'grayscale'
   }
 })
