@@ -44,6 +44,7 @@ export const globalStyles = globalCss({
   '*': {
     boxSizing: 'border-box',
     fontFamily: 'kumbh sans, sans-serif',
-    userSelect: 'none'
+    userSelect: 'none',
+    outline: 'none'
   }
 })
