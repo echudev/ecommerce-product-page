@@ -109,7 +109,7 @@ const Specs = ({ product }) => {
             <IconButton onClick={() => counter !== 0 ? setCounter(counter - 1) : null}>
               <img src={minusIcon} alt='minus' />
             </IconButton>
-            <Text as='h4' hm={1} bold>{counter}</Text>
+            <Text as='h4' css={{ textAlign: 'center', width: '40px' }} hm={1} bold>{counter}</Text>
             <IconButton onClick={() => setCounter(counter + 1)}>
               <img src={plusIcon} alt='plus' />
             </IconButton>
@@ -120,7 +120,7 @@ const Specs = ({ product }) => {
               Add to cart
             </Text>
           </Button>
-          <RadixToast open={open} setOpen={setOpen}/>
+          <RadixToast open={open} setOpen={setOpen} />
         </Controls>
       </Flex>
     </Wrapper>
