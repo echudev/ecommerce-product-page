@@ -32,7 +32,10 @@ export const {
   },
   media: {
     bp1: '(min-width: 375px)',
-    bp2: '(max-width: 740px)'
+    bp2: '(max-width: 740px)',
+    bp3: '(max-width: 1024px)',
+    bp4: '(min-width: 1200px)',
+    bp5: '(min-width: 1441px)'
   }
 })
 

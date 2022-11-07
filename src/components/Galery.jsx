@@ -8,8 +8,6 @@ const Wraper = styled('div', {
   flexDirection: 'column',
   justifyContent: 'right',
   height: '100%',
-  maxWidth: '410px',
-  maxHeight: '610px',
   margin: '0 4vw',
   '@bp2': {
     display: 'none'
@@ -27,6 +25,9 @@ const Img = styled('img', {
   boxShadow: '0 0 10px 0 rgba(0, 0, 0, .1), 0 10px 10px 0 rgba(0, 0, 0, .1)',
   '@bp2': {
     borderRadius: 0
+  },
+  '@bp5': {
+    maxHeight: '450px'
   }
 })
 
@@ -49,6 +50,9 @@ const Thumbnail = styled('img', {
   '&:hover': {
     cursor: 'pointer',
     filter: 'opacity(40%)'
+  },
+  '@bp5': {
+    maxWidth: '90px'
   }
 })
 

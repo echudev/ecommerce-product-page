@@ -21,7 +21,6 @@ const Wrapper = styled('div', {
 
 const description = css({
   justifyContent: 'flex-start',
-  maxHeight: '610px',
   maxWidth: '510px',
   padding: '1rem',
   '@bp2': {
