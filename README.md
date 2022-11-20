@@ -42,6 +42,7 @@ Users should be able to:
 
 ### Built with
 
+- [Vite](https://vitejs.dev/)
 - [React](https://reactjs.org/) - JS library
 - [Radix](https://www.radix-ui.com/) - Primitive Components
 - [Stitches](https://stitches.dev/) - CSS-in-JS 
