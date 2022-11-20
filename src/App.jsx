@@ -13,7 +13,7 @@ function App () {
         <Navbar/>
         <Separator light display={{ '@bp2': 'hidden' }} />
         <Routes>
-          <Route path='/' element={<Product />} />
+          <Route path='/*' element={<Product />} />
           <Route path='/collections' element={<Product />} />
           <Route path='/men' element={<Product />} />
           <Route path='/women' element={<Product />} />
